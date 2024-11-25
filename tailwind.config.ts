@@ -9,6 +9,13 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-annapurna-sil)'],
+      },
+      screens: {
+        '8xl': '1440px',
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

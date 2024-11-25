@@ -70,3 +70,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  .word-spacing-tight {
+    word-spacing: -0.1em;
+  }
+}

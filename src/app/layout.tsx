@@ -40,9 +40,12 @@ export default function RootLayout({ children }: Readonly<Props>) {
         className={cn(
           annapurna_sil.variable,
           inter.variable,
-          'relative antialiased bg-stone-200 after:w-full after:h-full after:bg-stone-500 after:left-0 after:top-0 after:absolute after:z-[-50] after:mix-blend-multiply'
+          'relative antialiased after:w-full after:h-full after:bg-stone-500 after:left-0 after:top-0 after:absolute after:z-[-50] after:mix-blend-multiply'
         )}
-        style={{ backgroundImage: 'url(axiom.png)', backgroundSize: '50px' }}
+        style={{
+          backgroundImage: 'url(/axiom.png)',
+          backgroundSize: '50px',
+        }}
       >
         <div className='w-full min-h-dvh text-stone-50'>
           <div className='w-full max-w-screen-8xl mx-auto'>

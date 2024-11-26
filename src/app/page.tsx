@@ -1,10 +1,11 @@
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Testimonials } from '@/components/testimonials'
 import { LogoCloud } from '@/components/logo-cloud'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 import {
   Star,
@@ -166,7 +167,7 @@ Section.displayName = 'Section'
 
 export default function Home() {
   return (
-    <div className='w-full min-h-dvh'>
+    <main className='w-full min-h-dvh'>
       <div className='w-full h-96 lg:h-[450px] xl:h-[550px] flex items-center p-6 lg:p-16 xl:p-24'>
         <div className='w-full flex items-center justify-between xl:mr-10'>
           <div>
@@ -174,19 +175,26 @@ export default function Home() {
               I'm here to help.
             </h1>
 
-            <p className='text-lg lg:text-2xl md:max-w-md lg:max-w-3xl mb-6 xl:mb-12 leading-snug tracking-tight word-spacing-tight'>
+            <p className='text-lg lg:text-2xl md:max-w-md lg:max-w-3xl mb-6 xl:mb-12 leading-snug tracking-tight word-spacing-tight antialiased'>
               Professional solutions that respect your mission, timeline, and
               budget. Technology shouldn't be complicated. Let's make it work
               for you.
             </p>
 
-            <Button
-              variant='outline'
-              size='lg'
-              className='bg-transparent font-semibold hover:text-stone-600 hover:scale-110 text-lg rounded-lg transition-all'
+            <Link
+              href='/project/new'
+              className={cn(
+                buttonVariants({
+                  variant: 'outline',
+                  size: 'lg',
+                  className:
+                    'bg-transparent font-semibold hover:text-stone-600 hover:scale-110 text-lg rounded-lg transition-all',
+                })
+              )}
+              prefetch
             >
               Get Started <MoveRight />
-            </Button>
+            </Link>
           </div>
 
           <Image
@@ -267,13 +275,20 @@ export default function Home() {
               can achieve them together.
             </p>
 
-            <Button
-              variant='outline'
-              size='lg'
-              className='bg-transparent font-semibold hover:text-stone-600 hover:scale-110 text-lg transition-all'
+            <Link
+              href='/project/new'
+              className={cn(
+                buttonVariants({
+                  variant: 'outline',
+                  size: 'lg',
+                  className:
+                    'bg-transparent font-semibold hover:text-stone-600 hover:scale-110 text-lg rounded-lg transition-all',
+                })
+              )}
+              prefetch
             >
               Let's Chat <MoveRight />
-            </Button>
+            </Link>
           </div>
 
           <Image
@@ -287,6 +302,6 @@ export default function Home() {
           />
         </Card>
       </section>
-    </div>
+    </main>
   )
 }

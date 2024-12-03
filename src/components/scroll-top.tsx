@@ -10,7 +10,7 @@ export function ScrollTopButton() {
 
   return (
     <Button variant='ghost' size='icon' onClick={scrollToTop}>
-      <ArrowUp size={30} className='shrink-0' />
+      <ArrowUp size={20} />
     </Button>
   )
 }

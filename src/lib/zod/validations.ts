@@ -33,6 +33,37 @@ export const emailValidation: FieldValidation = (value) => {
 }
 
 export const phoneValidation: FieldValidation = (value) => {
+  // Common US phone formats
+  const phonePatterns = [
+    /^\(\d{3}\) \d{3}-\d{4}$/, // (555) 555-5555
+    /^\d{3}-\d{3}-\d{4}$/, // 555-555-5555
+    /^\d{10}$/, // 5555555555
+    /^1\d{10}$/, // 15555555555
+    /^\+1\d{10}$/, // +15555555555
+    /^1?\s?\(\d{3}\)\s?\d{3}-\d{4}$/, // 1 (555) 555-5555
+    /^\d{3}\.\d{3}\.\d{4}$/, // 555.555.5555
+  ]
+
+  // Check if value matches any valid format
+  const isValidFormat = phonePatterns.some((pattern) => pattern.test(value))
+  if (!isValidFormat) return false
+
+  // Extract just the digits
   const digits = value.replace(/\D/g, '')
-  return digits.length >= 10 && digits.length <= 11
+
+  // Check length (10 digits or 11 with country code)
+  if (digits.length !== 10 && digits.length !== 11) return false
+
+  // If 11 digits, first digit should be 1
+  if (digits.length === 11 && digits[0] !== '1') return false
+
+  // Check area code (first 3 digits after country code)
+  const areaCode = digits.slice(-10, -7)
+  if (areaCode[0] === '0' || areaCode[0] === '1') return false
+
+  // Check exchange code (next 3 digits)
+  const exchangeCode = digits.slice(-7, -4)
+  if (exchangeCode[0] === '0' || exchangeCode[0] === '1') return false
+
+  return true
 }

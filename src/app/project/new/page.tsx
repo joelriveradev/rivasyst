@@ -1,7 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import {
@@ -30,88 +32,44 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import {
-  nameValidation,
-  emailValidation,
-  phoneValidation,
-} from '@/lib/zod/validations'
-
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { MoveRight, Slash } from 'lucide-react'
+import { MoveRight, Slash, Loader } from 'lucide-react'
 import { AskAI } from '@/components/ask-ai'
-import { submitProject } from '@/actions/submit-project'
-
-export const formSchema = z.object({
-  name: z
-    .string()
-    .min(1, 'This field is required')
-    .refine(nameValidation, { message: 'Name cannot contain any numbers' }),
-
-  phone: z
-    .string()
-    .min(10, 'Phone number must have at least 10 digits')
-    .max(15, 'Phone number too long')
-    .refine(phoneValidation, 'Phone number must have 10 digits')
-    .transform((val) => val.replace(/\D/g, '')),
-
-  email: z
-    .string()
-    .min(1, 'This field is required')
-    .email()
-    .refine(emailValidation, { message: 'Please enter a valid email address' })
-    .transform((val) => val.toLowerCase().trim()),
-
-  company: z.string().optional(),
-  context_problem: z.string().min(1, 'This field is required'),
-  context_solution: z.string().min(1, 'This field is required'),
-  design_branding: z.string().min(1, 'This field is required'),
-  design_preferences: z.string().min(1, 'This field is required'),
-  design_ux: z.string().min(1, 'This field is required'),
-  timeline: z.string().min(1, 'This field is required'),
-  budget: z.string().min(1, 'This field is required'),
-  additional_info: z.string().optional(),
-})
+import { createProject } from '@/actions/create-project'
+import { formSchema, initialFormState } from '@/lib/zod/schema'
 
 export default function NewProjectPage() {
+  const [projectRef, setProjectRef] = useState<string | null>(null)
+  const router = useRouter()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      phone: '',
-      email: '',
-      company: '',
-      context_problem: '',
-      context_solution: '',
-      design_branding: '',
-      design_preferences: '',
-      design_ux: '',
-      timeline: '',
-      budget: '',
-      additional_info: '',
-    },
+    defaultValues: initialFormState,
   })
 
+  const { isSubmitting, isSubmitted } = form.formState
+
+  useEffect(() => {
+    if (isSubmitted && projectRef) {
+      router.push(`/project/${projectRef}/status`)
+    }
+  }, [isSubmitted])
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await submitProject(values)
-    form.reset({
-      name: '',
-      phone: '',
-      email: '',
-      company: '',
-      context_problem: '',
-      context_solution: '',
-      design_branding: '',
-      design_preferences: '',
-      design_ux: '',
-      timeline: '',
-      budget: '',
-      additional_info: '',
-    })
+    try {
+      const project = await createProject(values)
+
+      if ('ref' in project) {
+        setProjectRef(project.ref)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -159,7 +117,7 @@ export default function NewProjectPage() {
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <section>
-                <h1 className='font-serif font-bold lg:text-3xl text-stone-500'>
+                <h1 className='font-serif font-bold text-2xl lg:text-3xl text-stone-500'>
                   1. Contact Information
                 </h1>
 
@@ -195,7 +153,6 @@ export default function NewProjectPage() {
                           <FormControl>
                             <Input
                               type='tel'
-                              pattern='[\d\s()+\-.]+'
                               placeholder='555-555-5555'
                               className='border-stone-400 h-16 shadow-sm rounded-xl pl-5 !text-lg'
                               {...field}
@@ -253,7 +210,7 @@ export default function NewProjectPage() {
               <Separator className='mt-10 mb-7' />
 
               <section>
-                <h1 className='font-serif font-bold lg:text-3xl text-stone-500 mb-10'>
+                <h1 className='font-serif font-bold text-2xl lg:text-3xl text-stone-500 mb-10'>
                   2. Project Context
                 </h1>
 
@@ -309,7 +266,7 @@ export default function NewProjectPage() {
               <Separator className='mt-10 mb-7' />
 
               <section>
-                <h1 className='font-serif font-bold lg:text-3xl text-stone-500 mb-10'>
+                <h1 className='font-serif font-bold text-2xl lg:text-3xl text-stone-500 mb-10'>
                   3. Design and Branding
                 </h1>
 
@@ -376,6 +333,7 @@ export default function NewProjectPage() {
                           <RadioGroup
                             onValueChange={field.onChange}
                             defaultValue={field.value}
+                            {...field}
                           >
                             <div className='w-full flex flex-col md:flex-row md:items-center gap-10'>
                               <FormItem className='flex-1'>
@@ -415,7 +373,7 @@ export default function NewProjectPage() {
               <Separator className='mt-10 mb-7' />
 
               <section>
-                <h1 className='font-serif font-bold lg:text-3xl text-stone-500 mb-10'>
+                <h1 className='font-serif font-bold text-2xl lg:text-3xl text-stone-500 mb-10'>
                   4. Timeline and Budget
                 </h1>
 
@@ -534,10 +492,17 @@ export default function NewProjectPage() {
 
               <div className='w-full flex justify-end'>
                 <Button
-                  className='mt-16 font-serif font-bold text-2xl rounded-lg bg-stone-600 py-6'
+                  className='mt-16 font-bold hover:scale-110 text-lg rounded-lg transition-all bg-stone-600'
                   size='lg'
+                  disabled={isSubmitting}
                 >
-                  Submit <MoveRight size={30} className='ml-2' />
+                  {isSubmitting ? 'Submitting' : 'Submit'}
+
+                  {isSubmitting ? (
+                    <Loader size={20} className='ml-1 animate-spin' />
+                  ) : (
+                    <MoveRight size={20} className='ml-1' />
+                  )}
                 </Button>
               </div>
             </form>

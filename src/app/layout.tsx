@@ -49,16 +49,23 @@ export default function RootLayout({ children }: Readonly<Props>) {
       >
         <div className='w-full min-h-dvh text-stone-50'>
           <div className='w-full max-w-screen-8xl mx-auto'>
-            <header className='w-full h-20 flex items-center justify-between p-6 lg:pl-16 xl:pl-24'>
+            <header className='w-full h-20 flex items-center justify-between p-6 lg:px-16 xl:px-24'>
               <Link
                 href='/'
                 className='font-bold text-lg xl:text-2xl tracking-tighter hover:opacity-50 transition-all'
               >
                 rivasyst
               </Link>
+
+              <Link
+                href='/auth/login'
+                className='tracking-tighter hover:opacity-50 transition-all'
+              >
+                Login
+              </Link>
             </header>
             {children}
-            <footer className='w-full h-20 mt-96 px-5 xl:px-0 flex items-center justify-between border-t border-t-stone-400 text-stone-50'>
+            <footer className='w-full h-20 mt-96 p-6 lg:px-16 xl:px-24 flex items-center justify-between border-t border-t-stone-400 text-stone-50'>
               <p className='text-sm'>
                 © {getYear()} Rivasyst. All rights reserved.
               </p>

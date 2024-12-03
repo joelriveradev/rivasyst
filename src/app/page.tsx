@@ -193,7 +193,7 @@ export default function Home() {
               )}
               prefetch
             >
-              Get Started <MoveRight />
+              Get Started <MoveRight size={20} />
             </Link>
           </div>
 
@@ -287,7 +287,7 @@ export default function Home() {
               )}
               prefetch
             >
-              Let's Chat <MoveRight />
+              Let's Chat <MoveRight size={20} />
             </Link>
           </div>
 

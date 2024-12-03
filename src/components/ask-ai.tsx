@@ -11,7 +11,7 @@ export function AskAI() {
       className='flex items-center gap-2 text-stone-500'
     >
       <p>Ask AI</p>
-      <Sparkles size={20} />
+      <Sparkles size={16} />
     </Button>
   )
 }

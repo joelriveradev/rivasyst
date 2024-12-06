@@ -162,6 +162,7 @@ export type Database = {
       phase_status: "NOT_STARTED" | "IN_PROGRESS" | "COMPLETED"
       project_phase: "DISCOVERY" | "PROPOSAL" | "DEVELOPMENT" | "LAUNCH"
       project_status:
+        | "RECEIVED"
         | "PLANNING"
         | "IN_PROGRESS"
         | "REVIEW"

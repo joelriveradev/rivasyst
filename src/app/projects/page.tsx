@@ -1,4 +1,4 @@
-import { Slash } from 'lucide-react'
+import { Slash, Plus, ArrowRight } from 'lucide-react'
 
 import {
   Breadcrumb,
@@ -17,6 +17,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { fetchProjects } from '@/actions/fetch-projects'
 import { formatDateCreated } from '@/lib/utils'
@@ -64,10 +65,16 @@ export default async function ProjectsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Submitted</TableHead>
-                  <TableHead>ID</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Progress</TableHead>
+                  <TableHead className='font-semibold min-w-[200px]'>
+                    Submitted
+                  </TableHead>
+
+                  <TableHead className='font-semibold min-w-[200px]'>
+                    ID
+                  </TableHead>
+                  <TableHead className='font-semibold'>Status</TableHead>
+                  <TableHead className='font-semibold'>Progress</TableHead>
+                  <TableHead className='font-semibold'>Action</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -76,35 +83,42 @@ export default async function ProjectsPage() {
                   ({ id, created_at, status, reference_number, progress }) => {
                     const href = `/project/${reference_number}/status`
                     return (
-                      <TableRow
-                        key={id}
-                        className='hover:bg-stone-200 hover:cursor-pointer rounded-xl'
-                      >
+                      <TableRow key={id} className='hover:bg-stone-200'>
                         <TableCell className='px-3'>
-                          <Link href={href} prefetch>
-                            {formatDateCreated(created_at)}
-                          </Link>
+                          {formatDateCreated(created_at)}
                         </TableCell>
 
-                        <TableCell>
-                          <Link href={href} prefetch>
-                            {reference_number}
-                          </Link>
-                        </TableCell>
+                        <TableCell>{reference_number}</TableCell>
 
                         <TableCell className='capitalize'>
-                          <Link href={href} prefetch>
-                            {status?.toLowerCase().split('_').join(' ')}
-                          </Link>
+                          {status?.toLowerCase().split('_').join(' ')}
                         </TableCell>
 
                         <TableCell>{progress}%</TableCell>
+                        <TableCell>
+                          <Link
+                            href={href}
+                            prefetch
+                            className='flex items-center gap-2'
+                          >
+                            View <ArrowRight size={14} />
+                          </Link>
+                        </TableCell>
                       </TableRow>
                     )
-                  }
+                  },
                 )}
               </TableBody>
             </Table>
+
+            <Button
+              className='mt-20 bg-stone-700 font-semibold border border-stone-500 px-4 pl-3'
+              asChild
+            >
+              <Link className='flex items-center' href='/project/new' prefetch>
+                <Plus size={18} /> Create Project
+              </Link>
+            </Button>
           </section>
         </Card>
       </section>

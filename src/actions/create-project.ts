@@ -2,11 +2,13 @@
 
 import { z } from 'zod'
 import { cookies } from 'next/headers'
+
 import { formSchema } from '@/lib/zod/schema'
 import { createClient } from '@/lib/supabase/server'
 import { createProjectPhases } from './create-phases'
 import { createReferenceNumber } from './create-ref-number'
 import { createInitialTasks } from './create-initial-tasks'
+import { SendEmail } from './send-email'
 
 export async function createProject(values: z.infer<typeof formSchema>) {
   const supabase = createClient(cookies())
@@ -28,7 +30,7 @@ export async function createProject(values: z.infer<typeof formSchema>) {
       budget: values.budget,
       timeline: values.timeline,
       additional_info: values.additional_info,
-      status: 'PLANNING',
+      status: 'RECEIVED',
       complete: false,
     })
     .select()
@@ -42,6 +44,17 @@ export async function createProject(values: z.infer<typeof formSchema>) {
     await createProjectPhases(project.id)
 
   await createInitialTasks(discoveryPhaseID, proposalPhaseID)
+
+  await SendEmail({
+    type: 'confirmation',
+    details: {
+      full_name: project.full_name,
+      email: project.email,
+      reference_number,
+      budget: project.budget,
+      timeline: project.timeline,
+    },
+  })
 
   return { ref: project.reference_number }
 }

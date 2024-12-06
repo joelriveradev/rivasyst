@@ -1,3 +1,4 @@
+import { cookies as Cookies } from 'next/headers'
 import { Slash, SquarePen } from 'lucide-react'
 
 import {
@@ -12,13 +13,14 @@ import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
+import { ProjectConfirmationToast } from '@/components/toasts/project-conf'
+import { Show } from '@/components/show'
 import { ProjectProgress } from '@/components/project/progress'
 import { ProjectPhases } from '@/components/project/phases'
 import { cn, formatDateCreated } from '@/lib/utils'
 import { fetchProject } from '@/actions/fetch-project'
 
 import Link from 'next/link'
-import { Show } from '@/components/show'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -27,8 +29,15 @@ export default async function ProjectStatusPage({ params }: Props) {
   const { id: ref } = await params
   const { id, status, reference_number, created_at } = await fetchProject(ref)
 
+  const cookies = await Cookies()
+  const projectConfirmationSeen = cookies.has(`toast-received-${id}`)
+
   return (
     <main className='w-full min-h-dvh'>
+      <Show when={status === 'RECEIVED' && !projectConfirmationSeen}>
+        <ProjectConfirmationToast projectId={id} />
+      </Show>
+
       <Breadcrumb className='mb-7'>
         <BreadcrumbList className='text-stone-50 pl-6 lg:pl-16 xl:pl-24'>
           <BreadcrumbItem>

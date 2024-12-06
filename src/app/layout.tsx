@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Annapurna_SIL } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ScrollTopButton } from '@/components/scroll-top'
+import { Toaster } from '@/components/ui/toaster'
 
 import Link from 'next/link'
 
@@ -40,13 +41,15 @@ export default function RootLayout({ children }: Readonly<Props>) {
         className={cn(
           annapurna_sil.variable,
           inter.variable,
-          'relative antialiased after:w-full after:h-full after:bg-stone-500 after:left-0 after:top-0 after:absolute after:z-[-50] after:mix-blend-multiply'
+          'relative antialiased after:w-full after:h-full after:bg-stone-500 after:left-0 after:top-0 after:absolute after:z-[-50] after:mix-blend-multiply',
         )}
         style={{
           backgroundImage: 'url(/axiom.png)',
           backgroundSize: '50px',
         }}
       >
+        <Toaster />
+
         <div className='w-full min-h-dvh text-stone-50'>
           <div className='w-full max-w-screen-8xl mx-auto'>
             <header className='w-full h-20 flex items-center justify-between p-6 lg:px-16 xl:px-24'>
@@ -65,6 +68,7 @@ export default function RootLayout({ children }: Readonly<Props>) {
               </Link>
             </header>
             {children}
+
             <footer className='w-full h-20 mt-96 p-6 lg:px-16 xl:px-24 flex items-center justify-between border-t border-t-stone-400 text-stone-50'>
               <p className='text-sm'>
                 © {getYear()} Rivasyst. All rights reserved.

@@ -12,27 +12,32 @@
     "email:export": "email export --dir src/lib/emails --pretty"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.0.7",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.2",
+    "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-radio-group": "^1.2.1",
+    "@radix-ui/react-scroll-area": "^1.2.1",
     "@radix-ui/react-select": "^2.1.2",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "@react-email/components": "^0.0.29",
     "@supabase/ssr": "^0.5.2",
+    "ai": "^4.0.13",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.4.0",
+    "install": "^0.13.0",
     "lucide-react": "^0.460.0",
-    "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-hook-form": "^7.53.2",
+    "react-markdown": "^9.0.1",
     "resend": "^4.0.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
@@ -46,6 +51,6 @@
     "react-email": "3.0.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
-    "next": "*"
+    "next": "^15.1.0"
   }
 }

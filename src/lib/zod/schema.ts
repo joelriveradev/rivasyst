@@ -32,7 +32,9 @@ export const formSchema = z.object({
   additional_info: z.string().optional(),
 })
 
-export const initialFormState: z.infer<typeof formSchema> = {
+export type FormSchema = z.infer<typeof formSchema>
+
+export const initialFormState: FormSchema = {
   name: '',
   phone: '',
   email: '',
@@ -46,3 +48,21 @@ export const initialFormState: z.infer<typeof formSchema> = {
   budget: '',
   additional_info: '',
 }
+
+export type AskAIFields = keyof Pick<
+  FormSchema,
+  | 'context_problem'
+  | 'context_solution'
+  | 'budget'
+  | 'design_branding'
+  | 'design_preferences'
+  | 'design_ux'
+>
+
+export type AskAITextareaFields = keyof Pick<
+  FormSchema,
+  | 'context_problem'
+  | 'context_solution'
+  | 'design_branding'
+  | 'design_preferences'
+>

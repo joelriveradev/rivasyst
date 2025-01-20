@@ -215,14 +215,14 @@ export default function NewProjectPage() {
                 </h1>
 
                 <FormField
-                  name='context_problem'
+                  name='context_solution'
                   control={form.control}
                   render={({ field }) => {
                     return (
                       <FormItem className='mb-10'>
                         <FormLabel className='flex items-center justify-between'>
-                          What problem are you solving? *
-                          <AskAI />
+                          What would you like to build? *
+                          <AskAI fieldLabel='context_solution' />
                         </FormLabel>
 
                         <FormControl>
@@ -239,14 +239,14 @@ export default function NewProjectPage() {
                 />
 
                 <FormField
-                  name='context_solution'
+                  name='context_problem'
                   control={form.control}
                   render={({ field }) => {
                     return (
                       <FormItem>
                         <FormLabel className='flex items-center justify-between'>
-                          What would you like to build? *
-                          <AskAI />
+                          What problem are you solving? *
+                          <AskAI fieldLabel='context_problem' />
                         </FormLabel>
 
                         <FormControl>
@@ -278,7 +278,7 @@ export default function NewProjectPage() {
                       <FormItem className='mb-10'>
                         <FormLabel className='flex items-center justify-between'>
                           Do you have an existing branding? *
-                          <AskAI />
+                          <AskAI fieldLabel='design_branding' />
                         </FormLabel>
 
                         <FormControl>
@@ -302,7 +302,7 @@ export default function NewProjectPage() {
                       <FormItem className='mb-10'>
                         <FormLabel className='flex items-center justify-between'>
                           Any design preferences? *
-                          <AskAI />
+                          <AskAI fieldLabel='design_preferences' />
                         </FormLabel>
 
                         <FormControl>
@@ -326,7 +326,7 @@ export default function NewProjectPage() {
                       <FormItem>
                         <FormLabel className='flex items-center justify-between'>
                           Do you have the UI/UX design? *
-                          <AskAI />
+                          <AskAI fieldLabel='design_ux' />
                         </FormLabel>
 
                         <FormControl>
@@ -386,7 +386,6 @@ export default function NewProjectPage() {
                         <FormItem className='flex-1'>
                           <FormLabel className='flex items-center justify-between'>
                             Do you have a timeline in mind? *
-                            <div className='p-[18px]' />
                           </FormLabel>
 
                           <FormControl>
@@ -427,7 +426,7 @@ export default function NewProjectPage() {
                         <FormItem className='flex-1'>
                           <FormLabel className='flex items-center justify-between'>
                             What's your budget range? *
-                            <AskAI />
+                            <AskAI fieldLabel='budget' />
                           </FormLabel>
 
                           <FormControl>

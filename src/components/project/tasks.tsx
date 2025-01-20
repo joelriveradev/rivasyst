@@ -12,23 +12,23 @@ export async function Tasks({ phaseId }: Props) {
 
   const sorted = tasks.sort(
     (a, b) =>
-      new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
   )
 
   return (
     <div>
       <small className='ml-11 mb-2 block'>Tasks</small>
 
-      <ol className='list-disc'>
+      <ol className='list-decimal'>
         {sorted.map(({ id, completed, title, owner }) => {
           return (
             <li
               key={id}
               className={cn(
-                'text-base list-decimal list-inside ml-11 py-4 border-t items-center justify-between',
+                'text-base list-inside ml-11 py-4 border-t items-center justify-between',
                 {
                   'line-through opacity-70': completed,
-                }
+                },
               )}
             >
               {title}

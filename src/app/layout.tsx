@@ -59,13 +59,6 @@ export default function RootLayout({ children }: Readonly<Props>) {
               >
                 rivasyst
               </Link>
-
-              <Link
-                href='/auth/login'
-                className='tracking-tighter hover:opacity-50 transition-all'
-              >
-                Login
-              </Link>
             </header>
             {children}
 

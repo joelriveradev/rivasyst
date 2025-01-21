@@ -132,7 +132,7 @@ function Section({ data, className, featureClassName }: SectionProps) {
       <Card
         className={cn(
           'p-6 lg:p-16 xl:p-24 rounded-2xl xl:rounded-[58px] text-stone-500 bg-stone-100',
-          className
+          className,
         )}
       >
         <h1 className='mb-5 font-medium text-lg'>{title}</h1>
@@ -148,7 +148,7 @@ function Section({ data, className, featureClassName }: SectionProps) {
                 key={`${id}-feature-${i}`}
                 className={cn(
                   'border-t border-t-stone-400 text-stone-400 mb-14 xl:mb-0',
-                  featureClassName
+                  featureClassName,
                 )}
               >
                 <Icon size={24} className='my-8' />
@@ -189,7 +189,7 @@ export default function Home() {
                   size: 'lg',
                   className:
                     'bg-transparent font-semibold hover:text-stone-600 hover:scale-110 text-lg rounded-lg transition-all',
-                })
+                }),
               )}
               prefetch
             >
@@ -244,7 +244,7 @@ export default function Home() {
                       'md:border-b md:border-b-stone-400/60 lg:pb-12':
                         i + 1 < 3,
                       'lg:pt-12': i + 1 > 2,
-                    }
+                    },
                   )}
                 >
                   <span className='opacity-50 ml-1.5'>{i + 1}.</span>
@@ -283,7 +283,7 @@ export default function Home() {
                   size: 'lg',
                   className:
                     'bg-transparent font-semibold hover:text-stone-600 hover:scale-110 text-lg rounded-lg transition-all',
-                })
+                }),
               )}
               prefetch
             >

@@ -1,5 +1,6 @@
 'use client'
 
+import { Metadata } from 'next'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -43,6 +44,61 @@ import { AskAI } from '@/components/ask-ai'
 import { createProject } from '@/actions/create-project'
 import { formSchema, initialFormState } from '@/lib/zod/schema'
 
+import Script from 'next/script'
+
+const metadata: Metadata = {
+  title: 'Start Your Project | Rivasyst',
+  description:
+    "Let's work together. As your engineering partner, I'll guide you through a clear, structured process to understand your needs and create a solution that fits your business and budget. Let's build something remarkable together.",
+  openGraph: {
+    title: 'Start Your Project | Rivasyst',
+    description:
+      "Let's work together. As your engineering partner, I'll guide you through a clear, structured process to understand your needs and create a solution that fits your business and budget.",
+    url: 'https://rivasyst.com/project',
+    siteName: 'Rivasyst',
+    images: [
+      {
+        url: 'https://rivasyst.com/og.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Start Your Project | Rivasyst',
+    description:
+      "Let's work together. As your engineering partner, I'll guide you through a clear, structured process to understand your needs and create a solution that fits your business and budget.",
+    images: ['https://rivasyst.com/og.png'],
+  },
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Start Your Project with Rivasyst',
+  description:
+    "Let's work together. As your engineering partner, I'll guide you through a clear, structured process to understand your needs and create a solution that fits your business and budget.",
+  mainEntity: {
+    '@type': 'ContactPoint',
+    contactType: 'project inquiry',
+    email: 'joel@rivasyst.com',
+    telephone: '(407) 994-8118',
+  },
+  provider: {
+    '@type': 'Person',
+    name: 'Joel Rivera',
+    jobTitle: 'Software Engineer & Consultant',
+  },
+  offers: {
+    '@type': 'Offer',
+    description:
+      'Professional software development and design services with flexible engagement options',
+  },
+}
+
 export default function NewProjectPage() {
   const [projectRef, setProjectRef] = useState<string | null>(null)
   const router = useRouter()
@@ -74,6 +130,13 @@ export default function NewProjectPage() {
 
   return (
     <main className='w-full min-h-dvh'>
+      <Script
+        id='structured-data'
+        type='application/ld+json'
+        strategy='beforeInteractive'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <section className='w-full h-96 lg:h-[450px] xl:h-[502px] flex flex-col items-start justify-center p-6 lg:p-16 xl:p-24'>
         <h1 className='font-bold font-serif mb-4 text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:tracking-tight word-spacing-tight'>
           Let's Begin your Project

@@ -130,13 +130,6 @@ export default function NewProjectPage() {
 
   return (
     <main className='w-full min-h-dvh'>
-      <Script
-        id='structured-data'
-        type='application/ld+json'
-        strategy='beforeInteractive'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <section className='w-full h-96 lg:h-[450px] xl:h-[502px] flex flex-col items-start justify-center p-6 lg:p-16 xl:p-24'>
         <h1 className='font-bold font-serif mb-4 text-4xl md:text-5xl lg:text-6xl xl:text-8xl xl:tracking-tight word-spacing-tight'>
           Let's Begin your Project
@@ -571,6 +564,11 @@ export default function NewProjectPage() {
           </FormProvider>
         </Card>
       </section>
+
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </main>
   )
 }

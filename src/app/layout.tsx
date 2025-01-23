@@ -93,13 +93,6 @@ export default function RootLayout({ children }: Readonly<Props>) {
 
   return (
     <html lang='en'>
-      <Script
-        id='structured-data'
-        type='application/ld+json'
-        strategy='beforeInteractive'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
       <body
         className={cn(
           annapurna_sil.variable,
@@ -134,7 +127,10 @@ export default function RootLayout({ children }: Readonly<Props>) {
           </div>
         </div>
 
-        <script type='application/ld+json'></script>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   )

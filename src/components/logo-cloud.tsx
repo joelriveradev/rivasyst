@@ -15,6 +15,7 @@ export function LogoCloud() {
           priority
           alt='IBM logo'
           className='scale-75 lg:scale-100'
+          style={{ width: 'auto' }}
         />
 
         <Image
@@ -24,6 +25,7 @@ export function LogoCloud() {
           priority
           alt='Morgan Stanley logo'
           className='scale-75 lg:scale-100'
+          style={{ width: 'auto' }}
         />
 
         <Image
@@ -33,6 +35,7 @@ export function LogoCloud() {
           priority
           alt='CNN logo'
           className='scale-75 lg:scale-100 md:-ml-4 lg:-ml-3'
+          style={{ width: 'auto', height: 'auto' }}
         />
       </div>
     </div>
